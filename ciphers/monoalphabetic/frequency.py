@@ -9,46 +9,72 @@ with open("ciphertext.txt") as reader:
 # {'a': 0, 'b': 0, ...}
 abc = "".join([chr(x + ord('a')) for x in range(26)])
 zeros = [0] * len(abc)
-ct_count = dict(zip(abc, zeros))
+ctx_count = dict(zip(abc, zeros))
 for c in ciphertext:
     if not c.isalpha():
         continue
-    ct_count[c.lower()] += 1
+    ctx_count[c.lower()] += 1
 # {'a': 5, 'b': 14, ...}
-# print(ct_count)
+# print(ctx_count)
 
 # sort ciphertext letter frequencies (descending)
 # R, S, F, I...
 frequency_ciphertext = []
 # https://stackoverflow.com/questions/4859292/how-can-i-get-a-random-key-value-pair-from-a-dictionary
 # for sorting runs
-for i in range(len(ct_count)):
+for i in range(len(ctx_count)):
     # find most abundant letter
-    abundant_letter = random.choice(list(ct_count.keys()))
-    for key in ct_count:
-        if ct_count[key] >= ct_count[abundant_letter]:
+    abundant_letter = random.choice(list(ctx_count.keys()))
+    for key in ctx_count:
+        if ctx_count[key] >= ctx_count[abundant_letter]:
             abundant_letter = key
     # append it
     frequency_ciphertext.append(abundant_letter)
     # https://www.freecodecamp.org/news/python-remove-key-from-dictionary/
     # remove it and repeat for next highest letters
-    del ct_count[abundant_letter]
-# print(frequency_ciphertext)
+    del ctx_count[abundant_letter]
+print(frequency_ciphertext)
+
+
 
 # # unsorted list of english letters and their frequencies
-# uns_eng_frq = []
+eng_count = {}
 # # https://docs.python.org/3/library/csv.html
-# with open('uns_eng_frq.csv', newline='') as csvfile:
-#     reader = csv.reader(csvfile, delimiter=',')
-#     for row in reader:
-#         # 'a': 0.08167
-#         letter = str(row[0]).lower()
-#         frequency = float(row[1])
-#         obj = {
-#             letter: frequency
-#         }
-#         uns_eng_frq.append(obj)
-# print(uns_eng_frq)
+with open('uns_eng_frq.csv', newline='') as csvfile:
+    reader = csv.reader(csvfile, delimiter=',')
+    for row in reader:
+        # 'a': 0.08167
+        letter = str(row[0]).lower()
+        frequency = float(row[1])
+        eng_count[letter] = frequency
+# print(eng_count)
+# sort ciphertext letter frequencies (descending)
+# R, S, F, I...
+frequency_english = []
+# https://stackoverflow.com/questions/4859292/how-can-i-get-a-random-key-value-pair-from-a-dictionary
+# for sorting runs
+for i in range(len(eng_count)):
+    # find most abundant letter
+    abundant_letter = random.choice(list(eng_count.keys()))
+    for key in eng_count:
+        if eng_count[key] >= eng_count[abundant_letter]:
+            abundant_letter = key
+    # append it
+    frequency_english.append(abundant_letter)
+    # https://www.freecodecamp.org/news/python-remove-key-from-dictionary/
+    # remove it and repeat for next highest letters
+    del eng_count[abundant_letter]
+print(frequency_english)
+
+mapper = dict(zip(frequency_ciphertext, frequency_english))
+print(mapper)
+
+
+
+
+
+
+
 # # https://www.freecodecamp.org/news/sort-dictionary-by-value-in-python/#howtosortdatawiththesortedmethod
 # # keep as list of tuples for our needs and purposes
 # sorted_frequencies = sorted(uns_eng_frq) #, key=lambda x:x, reverse=True)
