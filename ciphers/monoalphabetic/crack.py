@@ -1,18 +1,23 @@
-from caesar import caesar_cipher
-from multiplicative import Multiplicative
+# Hello, this file "cracks" monoalphabetic ciphers
+# by filing brute force results
+# elsewhere we will use BF files to guess at
+# the key, then reverse the key,
+# of ciphertext from a monoalphabetic cipher
 
-# Caesar cipher keys
-# !0, !26, !13
-c_ks = [x for x in range(1, 25+1)]
-c_ks.remove(13)
-# Multiplicative cipher keys
-# !0, !1, !13, !26, !even
-m_ks = [(x*2+1) for x in range(1, 12+1)]
-m_ks.remove(13)
+from monoalphabetic import Monoalphabetic
 
-mc = Multiplicative()
+# message = "and you too, brutus?"
+key = 13
+mono = Monoalphabetic()
+abcm = mono.alphabet
+mono.caesar(key) # mono.genmap("c", 3)
+encrypted = mono.substitute(abcm)
+again = mono.substitute(encrypted)
+print(key)
+print(abcm)
+print(encrypted)
+print(again)
 
-message = "get up out of that grave woah"
 
 import random
 print(f"MESSAGE: '{message}'")
