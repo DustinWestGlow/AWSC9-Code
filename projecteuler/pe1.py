@@ -1,7 +1,5 @@
-# FIRST EDIT
-a = 123
-print(a)
-# TRY IT 
+# https://projecteuler.net/problem=1
+# Find the sum of all the multiples of 3 or 5 below 1000.
 limit = 10**3
 total = 0
 
