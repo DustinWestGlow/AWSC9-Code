@@ -33,9 +33,7 @@ for i in range(len(ctx_count)):
     # https://www.freecodecamp.org/news/python-remove-key-from-dictionary/
     # remove it and repeat for next highest letters
     del ctx_count[abundant_letter]
-print(frequency_ciphertext)
-
-
+# print(frequency_ciphertext)
 
 # # unsorted list of english letters and their frequencies
 eng_count = {}
@@ -64,72 +62,52 @@ for i in range(len(eng_count)):
     # https://www.freecodecamp.org/news/python-remove-key-from-dictionary/
     # remove it and repeat for next highest letters
     del eng_count[abundant_letter]
-print(frequency_english)
+# print(frequency_english)
 
-mapper = dict(zip(frequency_ciphertext, frequency_english))
-print(mapper)
+# MAP most frequent ctxt -> english
+realkey = "SZJTRDPUNBOHEWQGVFLIKAXMYC".lower()
+mapper = dict(zip(realkey, abc))
+# mapper = dict(zip(frequency_ciphertext, frequency_english))
 
+# mapper['s'] = 'a'
+# mapper['h'] = 'l'
+# print(mapper)
 
+# for each letter in ciphertext
+plaintext = ""
+for c in ciphertext:
+    if not c.isalpha():
+        plaintext += c
+        continue
+    plaintext += mapper[c.lower()]
+# SEE IF IT WORKS
+# print(plaintext)
 
-
-
-
-
-# # https://www.freecodecamp.org/news/sort-dictionary-by-value-in-python/#howtosortdatawiththesortedmethod
-# # keep as list of tuples for our needs and purposes
-# sorted_frequencies = sorted(uns_eng_frq) #, key=lambda x:x, reverse=True)
-# with open("srt_eng_frq.csv", newline='') as csvfile:
-#     writer = csv.writer(csvfile, delimiter=',')
-#     for frq in sorted_frequencies:
-#         writer.writerow([sorted_frequencies[0], sorted_frequencies[1]])
-
+with open("frequencycracker.txt", "w") as writer:
+    writer.write("".join(frequency_ciphertext) + "\n")
+    writer.write("".join(frequency_english) + "\n")
+    writer.write("\n")
+    writer.write("\n")
+    txt = ""
+    cout = ""
+    pout = ""
+    linelength = 40
+    for i in range(len(ciphertext)):
+        cout += ciphertext[i]
+        pout += plaintext[i]
+        if i % linelength == (linelength - 1):
+            txt += cout
+            txt += "\n"
+            txt += pout
+            txt += "\n"
+            txt += "\n"
+            cout = ""
+            pout = ""
+    writer.write(txt)
     
 
-# for i in range(len(eng_freq)):
-#     eng_freq[i] = eng_freq[i] * 100.0
-# freq_mapper = []
-# sorting_max = 0
-# sorting_mapper = 0
-# maxes = []
-# for i in range(len(eng_freq)):
-#     for j in range(len(eng_freq)):
-#         if eng_freq[j]] >= sorting_max and j not in maxes:
-#             sorting_max = eng_freq[j]
-#             maxes.append(j)
-#         freq_mapper.append(j)
-#         sorting_mapper += 1
 
-
-# # https://gist.github.com/randallmorey/dea827d6f1c48374bdea0d2f5a320a16
-# # http://practicalcryptography.com/cryptanalysis/letter-frequencies-various-languages/english-letter-frequencies/
-
-# # https://stackoverflow.com/questions/51804790/in-place-modification-of-python-lists
-# #  frequencies [8.16, 1.49, 2.78, ...] for ['a', 'b', 'c', ...]
-
-# cph_counter = [0] * (ord('z')-ord('a')+1)
-# total_characters = 0
-# for c in ciphertext:
-#     if not c.isalpha():
-#         continue
-#     c = c.lower()
-#     alp_map = ord(c) - ord('a')
-#     cph_counter[alp_map] += 1
-#     total_characters += 1
-# for count in cph_counter:
-#     cph_freq
-# cph_freq = []
-
-
-# frq_map = dict(zip(cph_freq, eng_freq))
-
-# plaintext = ""
-# print(eng_freq)
-# # print(cph_freq)
-# # print(frq_map)
-# for c in ciphertext:
-#     if not c.islower():
-#         plaintext += c
-#         continue
-#     plaintext += frq_map[c]
-
-# # print(plaintext)
+# https://www.freecodecamp.org/news/sort-dictionary-by-value-in-python/#howtosortdatawiththesortedmethod
+# https://gist.github.com/randallmorey/dea827d6f1c48374bdea0d2f5a320a16
+# http://practicalcryptography.com/cryptanalysis/letter-frequencies-various-languages/english-letter-frequencies/
+# https://stackoverflow.com/questions/51804790/in-place-modification-of-python-lists
