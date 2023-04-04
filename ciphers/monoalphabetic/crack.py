@@ -7,10 +7,19 @@
 from monoalphabetic import Monoalphabetic
 
 # DONE! check 'caesar.txt' for results
+# mono = Monoalphabetic()
+# abcm = abcm = mono.alphabet
+# caesar_file = open("caesar.txt", "w")
+# for key in range(0, 26+1):
+#     mono.caesar(key)
+#     shifted = mono.substitute(abcm)
+#     caesar_file.write(f"{key},{shifted}\n")
+
+# DONE! check 'multiplicative.txt' for results
 mono = Monoalphabetic()
 abcm = abcm = mono.alphabet
-caesar_file = open("caesar.txt", "w")
+multiplicative_file = open("multiplicative.txt", "w")
 for key in range(0, 26+1):
-    mono.caesar(key)
+    mono.multiplicative(key)
     shifted = mono.substitute(abcm)
-    caesar_file.write(f"{key},{shifted}\n")
+    multiplicative_file.write(f"{key},{shifted}\n")

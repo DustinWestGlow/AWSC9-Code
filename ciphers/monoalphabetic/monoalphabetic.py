@@ -25,15 +25,12 @@ class Monoalphabetic:
                 continue
             ciphertext += self.substitution[c]
         return ciphertext
-    # 'encrypt' >> 'multiplicative'
-    # def multiplicative(self, key):
-    #     for i in range(len(self.alphabet)):
-    #         p = i + 1
-    #         multiplied = (p * key - 1) % 26
-    #         decimated_origin = self.alphabet[i]
-    #         decimated_letter = self.alphabet[multiplied]
-    #         self.alphabet_map[decimated_origin] = decimated_letter
-    #     return self.run_conversion(plaintext)
+    def multiplicative(self, key):
+        abc = self.alphabet
+        for i in range(len(abc)):
+            c_plain = abc[i]
+            c_cipher = abc[(((i + 1) * key) - 1) % len(abc)]
+            self.substitution[c_plain] = c_cipher
     def caesar(self, key):
         abc = self.alphabet
         for i in range(len(abc)):
